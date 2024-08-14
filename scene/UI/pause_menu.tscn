@@ -1,0 +1,77 @@
+[gd_scene load_steps=6 format=3 uid="uid://6s77nji4q37f"]
+
+[ext_resource type="Script" path="res://scripts/pauseMenu.gd" id="1_joye1"]
+[ext_resource type="PackedScene" uid="uid://dvnif7hym3q8x" path="res://scene/UI/OptionsMenu.tscn" id="1_rv65p"]
+[ext_resource type="Shader" path="res://scripts/shader/blur.gdshader" id="1_tyj5o"]
+[ext_resource type="FontFile" uid="uid://ba30kptj0m0yk" path="res://Nihonium113-Console.ttf" id="4_y8xxc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j36kg"]
+shader = ExtResource("1_tyj5o")
+
+[node name="Pause Menu" type="CanvasLayer"]
+process_mode = 3
+layer = 15
+script = ExtResource("1_joye1")
+
+[node name="Options Menu" parent="." instance=ExtResource("1_rv65p")]
+layer = 16
+visible = false
+
+[node name="Panel2" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Panel2"]
+material = SubResource("ShaderMaterial_j36kg")
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="Resume" type="Button" parent="Panel2/Panel"]
+layout_mode = 0
+offset_left = 168.0
+offset_top = 496.0
+offset_right = 290.0
+offset_bottom = 547.0
+theme_override_colors/font_hover_color = Color(0, 1, 0, 1)
+theme_override_fonts/font = ExtResource("4_y8xxc")
+text = "Resume"
+flat = true
+
+[node name="Settings" type="Button" parent="Panel2/Panel"]
+layout_mode = 0
+offset_left = 447.0
+offset_top = 496.0
+offset_right = 569.0
+offset_bottom = 547.0
+theme_override_colors/font_hover_color = Color(0, 1, 0, 1)
+theme_override_fonts/font = ExtResource("4_y8xxc")
+text = "Settings"
+flat = true
+
+[node name="Quit" type="Button" parent="Panel2/Panel"]
+layout_mode = 0
+offset_left = 720.0
+offset_top = 496.0
+offset_right = 842.0
+offset_bottom = 547.0
+theme_override_colors/font_hover_color = Color(0, 1, 0, 1)
+theme_override_fonts/font = ExtResource("4_y8xxc")
+text = "Quit"
+flat = true
+
+[node name="Label" type="Label" parent="Panel2/Panel"]
+layout_mode = 0
+offset_left = 344.0
+offset_top = 184.0
+offset_right = 679.0
+offset_bottom = 321.0
+theme_override_fonts/font = ExtResource("4_y8xxc")
+theme_override_font_sizes/font_size = 100
+text = "PAUSE"
+
+[connection signal="pressed" from="Panel2/Panel/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Panel2/Panel/Settings" to="." method="_on_settings_pressed"]

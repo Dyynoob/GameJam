@@ -10,6 +10,8 @@ var speed = 5.0
 
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
+@onready var playerModel = $Head/Player
+@onready var Gun = $Head/GUN_Elb
 
 @export var bob_freq = 1.5
 @export var bob_amp = 0.08
@@ -28,8 +30,8 @@ func _unhandled_input(event):
 		head.rotate_y(-event.relative.x * sensitivity)
 		camera.rotate_x(-event.relative.y * sensitivity)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-60), deg_to_rad(60))
-		
-		
+		playerModel.rotate_y(camera.rotation_degrees.y)
+		Gun.rotate_z(camera.rotation_degrees.z)
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -54,7 +56,6 @@ func _physics_process(delta):
 	else:
 		velocity.x = lerp(velocity.x, direction.x * speed, delta * 2.0)
 		velocity.z = lerp(velocity.z, direction.z * speed, delta * 2.0)
-		
 	if Input.is_action_pressed("sprint") and Input.is_action_pressed("for"):
 		speed = sprint_speed
 	else:
@@ -77,3 +78,4 @@ func _headbob(time) -> Vector3:
 	pos.y = sin(time * bob_freq) * bob_amp
 	pos.x = cos(time * bob_freq / 2) * bob_amp
 	return pos
+

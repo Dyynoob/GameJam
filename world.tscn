@@ -1,17 +1,18 @@
-[gd_scene load_steps=11 format=3 uid="uid://4xb43cljjaew"]
+[gd_scene load_steps=13 format=3 uid="uid://4xb43cljjaew"]
 
 [ext_resource type="PackedScene" uid="uid://bgibrekrfs4hk" path="res://Player.tscn" id="1_4gfi4"]
+[ext_resource type="Script" path="res://scripts/fourthWallbreakManager.gd" id="2_3dqqu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_svgj2"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 
-[sub_resource type="Sky" id="Sky_dqufa"]
+[sub_resource type="Sky" id="Sky_g0gvq"]
 sky_material = SubResource("ProceduralSkyMaterial_svgj2")
 
 [sub_resource type="Environment" id="Environment_fqbm5"]
 background_mode = 2
-sky = SubResource("Sky_dqufa")
+sky = SubResource("Sky_g0gvq")
 tonemap_mode = 2
 glow_enabled = true
 
@@ -33,6 +34,9 @@ material = SubResource("StandardMaterial3D_j2wjn")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5rkq6"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_yg536"]
+size = Vector3(7.56934, 3.18896, 1)
+
 [node name="World" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -43,7 +47,7 @@ shadow_enabled = true
 environment = SubResource("Environment_fqbm5")
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("1_4gfi4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0128292, 1, 0)
 
 [node name="Ground" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_6y203")
@@ -115,3 +119,22 @@ mesh = SubResource("BoxMesh_vyeqf")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Box3/StaticBody3D"]
 shape = SubResource("BoxShape3D_5rkq6")
+
+[node name="FourthWallBreakManager" type="Node" parent="."]
+script = ExtResource("2_3dqqu")
+Title = "06132032.txt"
+Text = "Cody - Hey, did you saw that one robot they annouced at the Con?
+Cody - They're soo cool! I wonder what kind of price they'll be
+John - Cody they ran away and they're sentinent now we are probably doomed
+Cody - What? Aint no way
+John - 06/13/2032-15:56:50.mp4
+Cody - WHAT
+*This is a test, Don't delete!*"
+
+[node name="Area3D" type="Area3D" parent="FourthWallBreakManager"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FourthWallBreakManager/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2124, 1.72942, 3.64892)
+shape = SubResource("BoxShape3D_yg536")
+
+[connection signal="body_entered" from="FourthWallBreakManager/Area3D" to="FourthWallBreakManager" method="_on_area_3d_body_entered"]

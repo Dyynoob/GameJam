@@ -1,9 +1,10 @@
-[gd_scene load_steps=20 format=3 uid="uid://cd1fs3j80cvgr"]
+[gd_scene load_steps=21 format=3 uid="uid://cd1fs3j80cvgr"]
 
 [ext_resource type="AudioStream" uid="uid://b2viocwh4gwbt" path="res://songs/IGDBGJ24-Niveau_1.wav" id="1_xqe7x"]
 [ext_resource type="PackedScene" uid="uid://bgibrekrfs4hk" path="res://Player.tscn" id="2_aq2ix"]
 [ext_resource type="PackedScene" uid="uid://bcgflfkdntof8" path="res://3d models/Trees.glb" id="3_royeg"]
 [ext_resource type="PackedScene" uid="uid://corug0fbo8uv7" path="res://3d models/Grass.tscn" id="4_8kgi1"]
+[ext_resource type="PackedScene" uid="uid://cowegryoqkhvs" path="res://scene/bird.tscn" id="5_ecw07"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_4mtc4"]
 lightmap_size_hint = Vector2i(502, 502)
@@ -205,3 +206,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.6958, -1.59366, -24.5801)
 
 [node name="Grass" parent="." instance=ExtResource("4_8kgi1")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -26.7407, -1.59366, 23.9989)
+
+[node name="Bird" parent="." instance=ExtResource("5_ecw07")]
+transform = Transform3D(-0.999804, 0, -0.0197733, 0, 1, 0, 0.0197733, 0, -0.999804, -17.5597, 9.78052, -5.69048)

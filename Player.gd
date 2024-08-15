@@ -12,6 +12,11 @@ var speed = 5.0
 @onready var camera = $Head/Camera3D
 @onready var playerModel = $Head/Player
 @onready var Gun = $Head/GUN_Elb
+@onready var health_manager = $HealthManager
+@onready var gun_barrel = $Head/GUN_Elb/RayCast3D
+
+var bullet = load("res://Bullet.tscn")
+var instance
 
 @export var bob_freq = 1.5
 @export var bob_amp = 0.08
@@ -24,14 +29,20 @@ var sprint_speed = default_speed * 1.5
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
+func take_damage(damage_amount: int):
+	health_manager.health -= damage_amount
+
+
 
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
 		head.rotate_y(-event.relative.x * sensitivity)
 		camera.rotate_x(-event.relative.y * sensitivity)
-		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-60), deg_to_rad(60))
+		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-40), deg_to_rad(40))
 		playerModel.rotate_y(camera.rotation_degrees.y)
 		Gun.rotate_z(camera.rotation_degrees.z)
+		Gun.rotate_y(camera.rotation_degrees.y)
+		Gun.rotate_y(camera.rotation.y)
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -69,6 +80,12 @@ func _physics_process(delta):
 	var target_fov = FOV + 1.25 * velocity_clamped
 	camera.fov = lerp(camera.fov, target_fov, delta * 8.0)
 	
+	if Input.is_action_just_pressed("shoot"):
+		instance = bullet.instantiate()
+		print(instance)
+		instance.position = gun_barrel.global_position
+		instance.transform.basis = gun_barrel.global_transform.basis
+		get_parent().add_child(instance)
 	
 	move_and_slide()
 

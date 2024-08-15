@@ -11,9 +11,9 @@ var speed = 5.0
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
 @onready var playerModel = $Head/Player
-@onready var Gun = $Head/GUN_Elb
+@onready var Gun = $Head/Camera3D/GUN_Elb
 @onready var health_manager = $HealthManager
-@onready var gun_barrel = $Head/GUN_Elb/RayCast3D
+@onready var gun_barrel = $Head/Camera3D/GUN_Elb/RayCast3D
 
 var bullet = load("res://Bullet.tscn")
 var instance

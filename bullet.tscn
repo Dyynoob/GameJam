@@ -29,6 +29,7 @@ material = SubResource("StandardMaterial3D_exsck")
 size = Vector3(0.1, 0.1, 0.1)
 
 [node name="Bullet" type="Node3D"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
 script = ExtResource("1_u7hlp")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
